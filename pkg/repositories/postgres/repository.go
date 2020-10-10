@@ -24,9 +24,16 @@ func NewRepository(
         config: config,
     }
 
-    dbpool, err := pgxpool.Connect(
+    dbpool, err := pgxpool.ConnectConfig(
         context.Background(),
-        config.URL,
+        &pgxpool.Config{
+            Host:           repo.config.Host,
+            Port:           repo.config.Port,
+            Database:       repo.config.Database,
+            User:           repo.config.User,
+            Password:       repo.config.Password,
+            ConnectTimeout: repo.config.ConnectTimeout,
+        },
     )
 
     if err != nil {
