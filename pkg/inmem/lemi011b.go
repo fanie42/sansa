@@ -24,6 +24,7 @@ func NewLemi011bRepo() lemi011b.DataRepo {
 func (repo *lemi011bRepo) Save(d *lemi011b.Data) error {
     repo.mtx.Lock()
     defer repo.mtx.Unlock()
+
     repo.data[d.ID] = d
     fmt.Println(d)
     return nil

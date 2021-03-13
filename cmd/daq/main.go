@@ -42,10 +42,24 @@ func init() {
 }
 
 func main() {
-    repo := local.NewLemi011bRepo(config.Local)
-    pres := nats.NewPresenter(config.Nats)
-    svc := lemi011b.NewService(repo, pres)
-    ctrl := serial.New(config.Serial, svc)
+    // Initialise infrastructure
+    myLocal := local.New(config.Local)
+    myNats := nats.New(config.Nats)
+    mySerial := serial.New(config.Serial)
 
-    ctrl.Run()
+    myLemi011b := lemi011b.New(
+        lemi011b.WithLocal(myLocal),
+        lemi011b.WithNats(myNats),
+        lemi011b.WithSerial(mySerial),
+    )
+
+    myLemi011b.Run()
+
+    // Adapters - This will be done by myLemi011b object
+    // repo := lemi011b.NewLocalRepo(myLocal)
+    // pres := lemi011b.NewNatsPres(myNats)
+    // svc := lemi011b.NewDataService(repo, pres)
+    // ctrl := lemi011b.NewSerialCtrl(svc)
+
+    // ctrl.Run()
 }

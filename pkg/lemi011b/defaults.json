@@ -1,0 +1,28 @@
+{
+    "local":
+    {
+        "base":
+        {
+            "prefix": "locsys#_",
+            "format": "20060102_15",
+            "postfix": "0000",
+            "extension": "dat"
+        },
+        "path":
+        {
+            "location": "/data",
+            "format": "2006/01/02"
+        }
+    },
+    "serial":
+    {
+        "name": "COM5",
+        "baud": 19200
+    },
+    "nats":
+    {
+        "url": "nats://localhost:4222",
+        "clusterID": "location",
+        ""
+    }
+}

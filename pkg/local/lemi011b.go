@@ -8,20 +8,6 @@ import (
     "github.com/fanie42/sansa/pkg/lemi011b"
 )
 
-type lemi011bRepo struct {
-    config Config
-    file   *os.File
-}
-
-// NewLemi011bRepo TODO
-func NewLemi011bRepo(
-    config Config,
-) lemi011b.DataRepo {
-    return &lemi011bRepo{
-        config: config,
-    }
-}
-
 // Save TODO -- Repetitive code can just be moved to a
 // utility file.
 func (repo *lemi011bRepo) Save(
