@@ -1,0 +1,47 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>REST API Tutorial – REST Client, REST Service, and API Calls Explained With Code Examples</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <button type="button" onclick="start()">Start</button>
+  <button type="button" onclick="stop()">Stop</button>
+
+<p id="demo"></p>
+
+<script>
+function start() {
+  var xhr = new XMLHttpRequest();
+  var url = "/start";
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+          var json = JSON.parse(xhr.responseText);
+          console.log(json.message);
+      }
+  };
+  var data = JSON.stringify({"annotation": "hello"});
+  xhr.send(data);
+}
+function stop() {
+  var xhr = new XMLHttpRequest();
+  var url = "/stop";
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+          var json = JSON.parse(xhr.responseText);
+          console.log(json.message);
+      }
+  };
+  var data = JSON.stringify({"annotation": "bye"});
+  xhr.send(data);
+}
+</script>
+</body>
+</html>

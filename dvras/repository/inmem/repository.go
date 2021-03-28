@@ -7,37 +7,35 @@ import (
 )
 
 type repository struct {
-    sensors map[dvras.SensorID]*dvras.Sensor
-    devices DeviceGateway
+    devices map[dvras.DeviceID]*dvras.Device
 }
 
 // New TODO
-func New(
-    deviceGateway DeviceGateway,
-) dvras.Repository {
-    return &repository{
-        sensors: make(map[dvras.SensorID]*dvras.Sensor),
-        devices: deviceGateway,
-    }
-}
-
-// Load TODO
-func (repo *repository) Load(
-    id dvras.SensorID,
-) (*dvras.Sensor, error) {
-    sensor := repo.sensors[id]
-
-    device, err := repo.devices.GetDeviceByID(sensor.DeviceID)
-    if err != nil {
-        return nil, fmt.Errorf("no device with this id. You need to register the device first")
+func New() dvras.DeviceRepository {
+    repo := &repository{
+        devices: make(map[dvras.DeviceID]*dvras.Device),
     }
 
+    return repo
 }
 
 // Save TODO
 func (repo *repository) Save(
-    sensor *dvras.Sensor,
+    device *dvras.Device,
 ) error {
-    repo.sensors[sensor.ID] = sensor
+    repo.devices[device.ID()] = device
 
+    return nil
+}
+
+// GetDeviceByID TODO
+func (repo *repository) GetDeviceByID(
+    id dvras.DeviceID,
+) (*dvras.Device, error) {
+    device, ok := repo.devices[id]
+    if !ok {
+        return nil, fmt.Errorf("no device with this id")
+    }
+
+    return device, nil
 }

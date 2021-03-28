@@ -1,7 +1,7 @@
 package dvras
 
-// Repository TODO
-type Repository interface {
-    Load(DataID) (*Data, error)
-    Save(*Data) error
+// DeviceRepository TODO
+type DeviceRepository interface {
+    GetDeviceByID(DeviceID) (*Device, error)
+    Save(*Device) error
 }
