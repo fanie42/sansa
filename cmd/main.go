@@ -3,9 +3,8 @@ package main
 import (
     "context"
     "log"
-    "net/http"
 
-    "github.com/fanie42/sansa/dvras/http/rest"
+    "github.com/fanie42/sansa/internal/http/rest"
     "github.com/fanie42/sansa/internal/timescaledb"
     "github.com/jackc/pgx/v4/pgxpool"
 )
@@ -23,5 +22,5 @@ func main() {
     eventstore := timescaledb.New(dbpool)
 
     api := rest.New(eventstore)
-    log.Fatal(http.ListenAndServe(":8080", api))
+    api.Run()
 }
